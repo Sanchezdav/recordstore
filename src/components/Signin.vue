@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import * as type from '@/store/mutationTypes/types'
+
 export default {
   name: 'Signin',
   data () {
@@ -48,8 +50,15 @@ export default {
         this.signinFailed(response)
         return
       }
+
       localStorage.csrf = response.data.csrf
       localStorage.signedIn = true
+
+      this.$store.dispatch({
+        type: type.signIn,
+        localStorage: localStorage
+      })
+
       this.error = ''
       this.$router.replace('/records')
     },
@@ -57,6 +66,11 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || ''
       delete localStorage.csrf
       delete localStorage.signedIn
+
+      this.$store.dispatch({
+        type: type.signOut,
+        localStorage: localStorage
+      })
     },
     checkSignedIn () {
       if (localStorage.signedIn) {

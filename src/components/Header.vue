@@ -7,34 +7,41 @@
         <a href="/" class="uppercase text-sm font-mono pl-4 font-semibold no-underline text-indigo-500 hover:text-indigo-700">Record Store</a>
       </div>
       <div>
-        <router-link to="/" class="text-grey-600 px-2 no-underline" v-if="!signedIn()">Sign in</router-link>
-        <router-link to="/signup" class="text-grey-600 px-2 no-underline" v-if="!signedIn()">Sign Up</router-link>
-        <router-link to="/records" class="text-grey-600 px-2 no-underline" v-if="signedIn()">Records</router-link>
-        <router-link to="/artists" class="text-grey-600 px-2 no-underline" v-if="signedIn()">Artists</router-link>
-        <a href="#" @click.prevent="signOut" class="text-grey-600 px-2 no-underline" v-if="signedIn()">Sign out</a>
+        <router-link to="/" class="text-grey-600 px-2 no-underline" v-if="!signedIn">Sign in</router-link>
+        <router-link to="/signup" class="text-grey-600 px-2 no-underline" v-if="!signedIn">Sign Up</router-link>
+        <router-link to="/records" class="text-grey-600 px-2 no-underline" v-if="signedIn">Records</router-link>
+        <router-link to="/artists" class="text-grey-600 px-2 no-underline" v-if="signedIn">Artists</router-link>
+        <a href="#" @click.prevent="signOut" class="text-grey-600 px-2 no-underline" v-if="signedIn">Sign out</a>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import * as type from '@/store/mutationTypes/types'
+
 export default {
   name: 'Header',
-  created () {
-    this.signedIn()
-  },
+  computed: mapState({
+    signedIn: state => state.localStorage.signedIn
+  }),
   methods: {
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
-    },
-    signedIn () {
-      return localStorage.signedIn
     },
     signOut () {
       this.$http.secured.delete('/signin')
         .then(response => {
           delete localStorage.csrf
           delete localStorage.signedIn
+          delete localStorage.vuex
+
+          this.$store.dispatch({
+            type: type.signOut,
+            localStorage: localStorage
+          })
+
           this.$router.replace('/')
         })
         .catch(error => this.setError(error, 'Cannot sign out'))

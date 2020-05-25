@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+
+import store from './store'
 import router from './router'
 import VueAxios from 'vue-axios'
 import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
@@ -13,6 +15,7 @@ Vue.use(VueAxios, {
 
 new Vue({
   router,
+  store,
   securedAxiosInstance,
   plainAxiosInstance,
   render: h => h(App)
