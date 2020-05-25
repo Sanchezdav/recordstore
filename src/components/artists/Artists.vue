@@ -4,7 +4,10 @@
     <h3 class="font-mono font-regular text-3xl mb-4">Add a new artist</h3>
     <form action="" @submit.prevent="addArtist">
       <div class="mb-6">
-        <input class="input"
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          Name
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           autofocus autocomplete="off"
           placeholder="Type an arist name"
           v-model="newArtist.name" />

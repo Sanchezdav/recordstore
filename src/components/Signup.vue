@@ -6,18 +6,18 @@
         <div class="text-red" v-if="error">{{ error }}</div>
 
         <div class="mb-6 text-left">
-          <label for="email" class="label">E-mail Address</label>
-          <input type="email" v-model="email" class="input w-full" id="email" placeholder="david.sanchez@mail.com">
+          <label for="email" class="block text-gray-700 text-md font-bold mb-2">E-mail Address</label>
+          <input type="email" v-model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" placeholder="david.sanchez@mail.com">
         </div>
 
         <div class="mb-6 text-left">
-          <label for="password" class="label">Password</label>
-          <input type="password" v-model="password" class="input w-full" id="password" placeholder="Password">
+          <label for="password" class="block text-gray-700 text-md font-bold mb-2">Password</label>
+          <input type="password" v-model="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" placeholder="Password">
         </div>
 
         <div class="mb-6 text-left">
-          <label for="password_confirmation" class="label">Password Confirmation</label>
-          <input type="password" v-model="password_confirmation" class="input w-full" id="password_confirmation" placeholder="Password Confirmation">
+          <label for="password_confirmation" class="block text-gray-700 text-md font-bold mb-2">Password Confirmation</label>
+          <input type="password" v-model="password_confirmation" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password_confirmation" placeholder="Password Confirmation">
         </div>
         <button type="submit" class="font-sans font-bold px-4 rounded cursor-pointer no-underline bg-green-500 hover:bg-green-700 block w-full py-4 text-white items-center justify-center">Sign Up</button>
 
